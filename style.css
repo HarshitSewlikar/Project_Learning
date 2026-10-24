@@ -1,0 +1,97 @@
+body{
+    
+    
+
+
+
+}
+
+.container{
+    
+}
+.summary{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    align-items: stretch;
+    
+}
+#income{
+  color:cadetblue;
+  background-color: azure;
+  font-size:20px;
+  font-weight: bold;
+  text-align: center;
+  padding: 1px;
+  margin: 1px;
+  border: 1px solid ;
+  border-radius:5px;
+  display: flex;
+  gap:20px;
+  justify-content: center;
+  align-items: center;  
+
+
+}
+
+#expense{
+   color:  aquamarine ;
+   background-color: lightgray;
+   text-align: center;
+   font-size:20px;
+   font-weight: bold;
+   padding: 10px;
+   margin:1px;
+   border:1px solid;
+   border-radius:5px;
+   display: flex;
+   gap: 20px;
+   justify-content: center;
+   align-items: center;
+
+}
+
+#balance{
+   color:chocolate;
+   background-color: lightyellow;
+   font-size: 20px;
+   font-weight: bold;
+   text-align: center;
+   padding: 10px;
+   margin:1px;
+   border: 1px solid;
+   border-radius:5px;
+   display: flex;
+   gap: 20px;
+   justify-content: center;
+   align-items: center;
+   
+}
+
+
+#transactions{
+      display: grid;
+      gird-template-rows:3                
+
+}
+
+#description{
+
+}
+
+#amount{
+    
+}
+
+#Transaction_type{
+
+}
+
+#submit_transaction{
+
+}
+
+
+#transaction_history{
+
+}
