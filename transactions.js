@@ -4,6 +4,7 @@ const revenue = document.getElementById("revenue");//the above element id of rev
 const description = document.getElementById("desc"); //getting description as an input
 const tran_hist = document.getElementById("history");//getting transaction history
 const amt_type = document.getElementById("type");//getting to drop down menu id
+const search_desc = document.getElementById("search");//getting the search filter desc
 
 
 let totalRevenue = 0;
@@ -54,27 +55,72 @@ function updateDisplay(tran,type){
   
 }
 
-function rendertransaction(transactions){
+function rendertransaction(filteredTransaction){
  tran_hist.innerHTML = "";
- transactions.forEach(function(transaction){
+ filteredTransaction.forEach(function(transaction){
        
       const new_list= document.createElement("li");
+      const deleteButton = document.createElement("button")
+     
       new_list.textContent = `${transaction.description}- rs${transaction.amount} - Transaction type ${transaction.transaction_type}`;
+      deleteButton.textContent = `delete`
+      tran_hist.appendChild(deleteButton);
       tran_hist.appendChild(new_list);
+       deleteButton.addEventListener("click", function() {
+    const result = confirm("Do you want to delete this transaction?");
+
+    if (result === true) {
+        const index = transactions.indexOf(transaction);
+
+        if (index === -1) {
+            return;
+        }
+
+        transactions.splice(index, 1);
+
+        if (transaction.transaction_type === "income") {
+            totalRevenue -= transaction.amount;
+        } else if (transaction.transaction_type === "expense") {
+            totalRevenue += transaction.amount;
+        }
+
+        revenue.textContent = totalRevenue;
+
+        rendertransaction(getFilteredTransaction());
+    } else {
+        return;
+    }
+});
 
 
 
-
- })
+       })
 
 
 }
+
+
+function getFilteredTransaction(){
+ const filter = search_desc.value.trim().toLowerCase();
+
+ return transactions.filter(t => t.description.toLowerCase().includes(filter))
+
+}
+
+
+search_desc.addEventListener("input",function(){
+     const filteredTransaction = getFilteredTransaction();
+     rendertransaction(filteredTransaction);
+
+
+});
 
 update.addEventListener("click" , function(){
    const tran = Number(revenue_updt.value);
    const amount = revenue_updt.value;
    const desc = description.value;
    const type= amt_type.value;
+   
   
    
 
@@ -86,12 +132,10 @@ update.addEventListener("click" , function(){
    updateDisplay(tran,type);
    rendertransaction(transactions);
 
+
    revenue_updt.value="";
    description.value="";
    
-   
-
-
 });
 
 
